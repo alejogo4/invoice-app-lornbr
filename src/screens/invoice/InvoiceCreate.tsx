@@ -1,21 +1,18 @@
+import {styled} from 'nativewind';
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
+import InvoiceForm from './components/invoiceForm/invoiceForm';
+
+const StyledView = styled(View);
 
 const InvoiceCreate = () => {
   return (
-    <View style={styles.container}>
-      <ScrollView style={{flex: 1}}>
-        <Text>Hello From Invoice Create</Text>
+    <StyledView className="flex bg-dark-200">
+      <ScrollView>
+        <InvoiceForm />
       </ScrollView>
-    </View>
+    </StyledView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
 
 export default InvoiceCreate;

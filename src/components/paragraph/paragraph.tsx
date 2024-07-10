@@ -7,6 +7,7 @@ interface ParagraphProps {
   color?: string;
   bold?: boolean;
   children: ReactNode;
+  addClass?: string;
 }
 
 const StyledText = styled(Text);
@@ -15,6 +16,7 @@ const Paragraph: React.FC<ParagraphProps> = ({
   size = 'medium',
   color = 'black',
   bold = false,
+  addClass,
   children,
 }) => {
   let textSizeClasses = 'text-base';
@@ -33,9 +35,9 @@ const Paragraph: React.FC<ParagraphProps> = ({
 
   return (
     <StyledText
-      className={`font-normal ${
+      className={`font-normal text-light-100 ${
         bold ? 'font-bold' : ''
-      } text-${color} ${textSizeClasses}`}>
+      } text-${color} ${textSizeClasses} ${addClass}`}>
       {children}
     </StyledText>
   );

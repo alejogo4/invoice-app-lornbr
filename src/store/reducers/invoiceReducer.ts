@@ -13,7 +13,8 @@ const initialState: IInvoice[] = initialInvoices;
 const invoiceReducer = createReducer(initialState, builder => {
   builder
     .addCase(addInvoice, (state, action) => {
-      state.push(action.payload);
+      console.log('Intooooo......');
+      return [...state, action.payload];
     })
     .addCase(removeInvoice, (state, action) => {
       return state.filter(invoice => invoice.id !== action.payload);
