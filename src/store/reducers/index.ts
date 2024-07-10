@@ -1,8 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import shoppingcartReducer from './shoppingcartReducer';
+import invoiceReducer from './invoiceReducer';
 
 const rootReducer = combineReducers({
-  shoppingcart: shoppingcartReducer,
+  invoices: invoiceReducer,
 });
 
 export default rootReducer;

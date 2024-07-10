@@ -15,11 +15,24 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*"],
-      "@store/*": ["src/store/*"],
-      "@components/*": ["src/components/*"]
+      "*": [
+        "node_modules/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ]
     }
   },
+  "include": [
+    "src",
+    "declarations.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "babel.config.js",
