@@ -1,24 +1,16 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Header from '@src/components/header/header';
 import InvoiceCreate from '@src/screens/invoice/InvoiceCreate';
 import InvoiceDetail from '@src/screens/invoice/InvoiceDetail';
 import InvoiceEdit from '@src/screens/invoice/InvoiceEdit';
 import InvoiceList from '@src/screens/invoice/InvoiceList';
-import {useAppSelector} from '@store/index';
+import RootStackParamList from '@src/types/InvoiceRoute';
 import React from 'react';
-import {Text, View} from 'react-native';
 
-function HomeScreen() {
-  const cart = useAppSelector(state => state.shoppingcart);
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen {cart.totalProductos}</Text>
-    </View>
-  );
-}
 
-const Stack = createNativeStackNavigator();
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   return (
@@ -36,7 +28,6 @@ function App() {
         <Stack.Screen name="InvoiceDetail" component={InvoiceDetail} />
         <Stack.Screen name="InvoiceCreate" component={InvoiceCreate} />
         <Stack.Screen name="InvoiceEdit" component={InvoiceEdit} />
-        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

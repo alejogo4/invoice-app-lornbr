@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import IconButton from '@src/components/button/button';
 import {
   addInvoice,
@@ -24,6 +25,7 @@ function calculateTotal(items: IItem[]): number {
 const InvoiceForm: React.FC = () => {
   const methods = useForm();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const mapDataToInvoice = (data: any, status: string) => {
     const senderAddress: IAddress = {
@@ -42,7 +44,7 @@ const InvoiceForm: React.FC = () => {
 
     const items: IItem[] = data.items.map((item: any) => ({
       name: item.name,
-      quantity: parseInt(item.quantity),
+      quantity: parseInt(item.quantity, 10),
       price: parseFloat(item.price),
       total: parseFloat(item.total),
     }));
@@ -66,17 +68,18 @@ const InvoiceForm: React.FC = () => {
   };
 
   const onSaveDraft = (data: any) => {
-    console.log('Saved as Draft:', data);
     const invoice = mapDataToInvoice(data, 'draft');
     dispatch(addInvoice(invoice));
   };
 
   const onSaveAndSend = (data: any) => {
-    console.log('Saved and Send:', data);
     const invoice = mapDataToInvoice(data, 'pending');
     dispatch(addInvoice(invoice));
   };
 
+  const onHandleCancelFlow = () => {
+    navigation.goBack();
+  };
   return (
     <FormProvider {...methods}>
       <View style={styles.container}>
@@ -86,10 +89,7 @@ const InvoiceForm: React.FC = () => {
         </StyledView>
         <ItemListForm />
         <View style={styles.buttonContainer}>
-          <IconButton
-            title="Discard"
-            onPress={methods.handleSubmit(onSaveDraft)}
-          />
+          <IconButton title="Discard" onPress={onHandleCancelFlow} />
           <IconButton
             title="Save as Draft"
             onPress={methods.handleSubmit(onSaveDraft)}

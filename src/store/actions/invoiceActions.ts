@@ -35,3 +35,4 @@ export const updateInvoice = createAction<IInvoice>('invoices/update-invoice');
 export const fetchInvoices = createAction<IInvoice[]>(
   'invoices/fetch-invoices',
 );
+export const getInvoiceById = createAction<string>('invoice/getInvoiceById');

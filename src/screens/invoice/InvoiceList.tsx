@@ -7,11 +7,11 @@ import Invoices from './components/invoices/invoices';
 const StyledView = styled(View);
 
 const InvoiceList = () => {
-  const invoices = useAppSelector(state => state.invoices);
+  const state = useAppSelector(state => state.invoices);
 
   return (
     <StyledView className="flex-1 bg-dark-200">
-      <Invoices invoices={invoices} />
+      <Invoices invoices={state.invoices} />
     </StyledView>
   );
 };
