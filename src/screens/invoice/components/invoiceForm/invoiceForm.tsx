@@ -18,12 +18,19 @@ import ItemListForm from '../itemListForm/itemListForm';
 
 const StyledView = styled(View);
 
+interface InvoiceFormProps {
+  editing?: boolean;
+  initialData?: IInvoice;
+}
+
 function calculateTotal(items: IItem[]): number {
   return items.reduce((total, item) => total + item.total, 0);
 }
 
-const InvoiceForm: React.FC = () => {
-  const methods = useForm();
+const InvoiceForm: React.FC<InvoiceFormProps> = ({editing, initialData}) => {
+  const methods = useForm({
+    defaultValues: editing ? {...initialData} : {},
+  });
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -92,10 +99,12 @@ const InvoiceForm: React.FC = () => {
           <IconButton title="Discard" onPress={onHandleCancelFlow} />
           <IconButton
             title="Save as Draft"
+            addClass="bg-light-400"
             onPress={methods.handleSubmit(onSaveDraft)}
           />
           <IconButton
             title="Save & Send"
+            addClass="bg-primary"
             onPress={methods.handleSubmit(onSaveAndSend)}
           />
         </View>

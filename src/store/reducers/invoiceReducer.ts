@@ -35,9 +35,10 @@ const invoiceReducer = createReducer(initialState, builder => {
     .addCase(fetchInvoices, (state, action: PayloadAction<IInvoice[]>) => {
       state.invoices = action.payload;
     })
-    .addCase(getInvoiceById, (state, action: PayloadAction<string>) => {
-      state.selectedInvoice =
-        state.invoices.find(invoice => invoice.id === action.payload) || null;
+    .addCase(getInvoiceById, (state, action: PayloadAction<string | null>) => {
+      state.selectedInvoice = action.payload
+        ? state.invoices.find(invoice => invoice.id === action.payload) || null
+        : null;
     });
 });
 

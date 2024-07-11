@@ -13,8 +13,8 @@ const TextInput: React.FC<TextInputProps> = props => {
         {props.placeholder}
       </Paragraph>
       <StyledTextInput
-        className="flex border border-light-400 bg-dark-purple-200 placeholder-dark-purple-100 p-2 rounded-md px-4 mt-2 mb-4"
-        placeholderTextColor={'#dfe3fa'}
+        className="flex border border-light-400 bg-dark-purple-200 p-2 rounded-md px-4 mt-2 mb-4 text-light-400"
+        placeholderTextColor={'#787c9f'}
         {...props}
       />
     </StyledView>

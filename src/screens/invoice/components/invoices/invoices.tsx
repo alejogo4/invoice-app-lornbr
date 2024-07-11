@@ -25,6 +25,11 @@ const Invoices: React.FC<InvoiceProps> = ({invoices}) => {
     navigation.navigate('InvoiceDetail', {id: item.id});
   };
 
+  const handleNewInvoice = () => {
+    navigation.navigate('InvoiceCreate');
+    dispatch(getInvoiceById(null));
+  };
+
   const renderItem = ({item}: {item: IInvoice}) => (
     <TouchableOpacity onPress={() => handleOpenDetail(item)}>
       <Card style="mb-4 mx-5">
@@ -63,7 +68,7 @@ const Invoices: React.FC<InvoiceProps> = ({invoices}) => {
             </StyledView>
           }
           title="New"
-          onPress={() => navigation.navigate('InvoiceCreate')}
+          onPress={handleNewInvoice}
           addClass="bg-primary"
         />
       </StyledView>

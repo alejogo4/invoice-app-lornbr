@@ -29,78 +29,79 @@ const ItemListForm: React.FC = () => {
 
   return (
     <View style={{marginTop: 20}}>
-      <Paragraph size="large" addClass="text-light-300 mt-8 mb-4" bold>
+      <Paragraph size="large" addClass="text-light-100 mt-8 mb-4" bold>
         Items List
       </Paragraph>
-      {fields.map((item, index) => (
-        <View key={item.id} style={styles.itemContainer}>
-          <Controller
-            control={control}
-            render={({field: {onChange, value}}) => (
-              <TextInput
-                onChangeText={onChange}
-                value={value}
-                placeholder="Item Name"
+      {fields.map((item, index) => {
+        console.log(item);
+        return (
+          <View key={item.id} style={styles.itemContainer}>
+            <Controller
+              control={control}
+              render={({field: {onChange, value}}) => (
+                <TextInput
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Item Name"
+                />
+              )}
+              name={`items[${index}].name`}
+              defaultValue=""
+            />
+            
+            <StyledView className="flex flex-row">
+              <Controller
+                control={control}
+                render={({field: {onChange, value}}) => (
+                  <TextInput
+                    onChangeText={onChange}
+                    value={value.toString()}
+                    placeholder="Qty."
+                    keyboardType="numeric"
+                    style={styles.inputSpace}
+                  />
+                )}
+                name={`items[${index}].quantity`}
               />
-            )}
-            name={`items[${index}].name`}
-            defaultValue=""
-          />
-          <StyledView className="flex flex-row">
-            <Controller
-              control={control}
-              render={({field: {onChange, value}}) => (
-                <TextInput
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Qty."
-                  keyboardType="numeric"
-                  style={styles.inputSpace}
-                />
-              )}
-              name={`items[${index}].quantity`}
-              defaultValue=""
-            />
-            <Controller
-              control={control}
-              render={({field: {onChange, value}}) => (
-                <TextInput
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Price"
-                  keyboardType="numeric"
-                  style={styles.inputSpace}
-                />
-              )}
-              name={`items[${index}].price`}
-              defaultValue=""
-            />
-            <Controller
-              control={control}
-              render={({field: {value}}) => (
-                <StyledView className="flex">
-                  <Paragraph size="small" addClass="opacity-30">
-                    Total:
-                  </Paragraph>
-                  <Paragraph
-                    bold
-                    size="small"
-                    addClass="opacity-30 text-center mt-4">
-                    {value}
-                  </Paragraph>
-                </StyledView>
-              )}
-              name={`items[${index}].total`}
-              defaultValue={0}
-            />
-            <TouchableOpacity
-              onPress={() => remove(index)}
-              style={{marginLeft: 50, marginTop: 38}}>
-              <TrasIcon width={13} height={16} />
-            </TouchableOpacity>
-          </StyledView>
-        </View>
-      ))}
+              <Controller
+                control={control}
+                render={({field: {onChange, value}}) => (
+                  <TextInput
+                    onChangeText={onChange}
+                    value={value.toString()}
+                    placeholder="Price"
+                    keyboardType="numeric"
+                    style={styles.inputSpace}
+                  />
+                )}
+                name={`items[${index}].price`}
+              />
+              <Controller
+                control={control}
+                render={({field: {value}}) => (
+                  <StyledView className="flex">
+                    <Paragraph size="small" addClass="opacity-30">
+                      Total:
+                    </Paragraph>
+                    <Paragraph
+                      bold
+                      size="small"
+                      addClass="opacity-30 text-center mt-4">
+                      {value}
+                    </Paragraph>
+                  </StyledView>
+                )}
+                name={`items[${index}].total`}
+              />
+              <TouchableOpacity
+                onPress={() => remove(index)}
+                style={{marginLeft: 50, marginTop: 38}}>
+                <TrasIcon width={13} height={16} />
+              </TouchableOpacity>
+            </StyledView>
+          </View>
+        );
+      })}
       <IconButton
         icon={<AddIcon />}
         title="Add Item"

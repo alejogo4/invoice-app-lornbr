@@ -12,7 +12,7 @@ const StyledView = styled(View);
 const Card: React.FC<CardProps> = ({style, children}) => {
   return (
     <StyledView
-      className={`bg-dark-purple-100 rounded-lg shadow-md p-4 ${style}`}>
+      className={`bg-dark-purple-100 rounded-lg overflow-hidden shadow-md p-4 ${style}`}>
       {children}
     </StyledView>
   );
