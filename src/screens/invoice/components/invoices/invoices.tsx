@@ -1,6 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import AddIcon from '@src/assets/icons/icon-plus.svg';
-import IconButton from '@src/components/button/button';
 import Card from '@src/components/card/card';
 import Paragraph from '@src/components/paragraph/paragraph';
 import {getInvoiceById, IInvoice} from '@src/store/actions/invoiceActions';
@@ -25,11 +23,6 @@ const Invoices: React.FC<InvoiceProps> = ({invoices}) => {
     navigation.navigate('InvoiceDetail', {id: item.id});
   };
 
-  const handleNewInvoice = () => {
-    navigation.navigate('InvoiceCreate');
-    dispatch(getInvoiceById(null));
-  };
-
   const renderItem = ({item}: {item: IInvoice}) => (
     <TouchableOpacity onPress={() => handleOpenDetail(item)}>
       <Card style="mb-4 mx-5">
@@ -52,26 +45,6 @@ const Invoices: React.FC<InvoiceProps> = ({invoices}) => {
 
   return (
     <>
-      <StyledView className="flex flex-row px-6 py-6 justify-between">
-        <StyledView className="flex">
-          <Paragraph bold size="large" color="light-100">
-            Invoices
-          </Paragraph>
-          <Paragraph bold size="small" color="light-100">
-            {invoices.length} invoices
-          </Paragraph>
-        </StyledView>
-        <IconButton
-          icon={
-            <StyledView className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <AddIcon />
-            </StyledView>
-          }
-          title="New"
-          onPress={handleNewInvoice}
-          addClass="bg-primary"
-        />
-      </StyledView>
       <FlatList
         data={invoices}
         renderItem={renderItem}
