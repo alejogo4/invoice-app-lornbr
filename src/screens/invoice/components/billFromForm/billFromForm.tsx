@@ -7,7 +7,10 @@ import {StyleSheet, View} from 'react-native';
 const StyledView = styled(View);
 
 const BillFromForm: React.FC = () => {
-  const {control} = useFormContext();
+  const {
+    control,
+    formState: {errors},
+  } = useFormContext();
 
   return (
     <View>
@@ -70,14 +73,6 @@ const BillFromForm: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 10,
-    color: 'white',
-  },
   inputSpace: {
     marginRight: 8,
   },

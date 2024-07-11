@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import Card from '@src/components/card/card';
 import Paragraph from '@src/components/paragraph/paragraph';
+import Status from '@src/components/status/status';
 import {getInvoiceById, IInvoice} from '@src/store/actions/invoiceActions';
 import {formatDate} from '@src/utils/date';
 import {styled} from 'nativewind';
@@ -37,7 +38,8 @@ const Invoices: React.FC<InvoiceProps> = ({invoices}) => {
             </Paragraph>
             <Paragraph bold>$ {item?.total}</Paragraph>
           </StyledView>
-          <Paragraph>{item.status}</Paragraph>
+
+          <Status status={item.status} />
         </StyledView>
       </Card>
     </TouchableOpacity>

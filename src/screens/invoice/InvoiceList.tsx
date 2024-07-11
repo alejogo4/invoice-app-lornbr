@@ -11,6 +11,7 @@ import Invoices from './components/invoices/invoices';
 import AddIcon from '@src/assets/icons/icon-plus.svg';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '@src/types/InvoiceRoute';
+import Filter from '@src/components/filter/filter';
 
 const StyledView = styled(View);
 
@@ -31,11 +32,9 @@ const InvoiceList: React.FC<InvoiceListProps> = ({navigation}) => {
     navigation.navigate('InvoiceCreate');
     dispatch(getInvoiceById(null));
   };
-  //state.invoices.length === 0
-  
 
   return (
-    <StyledView className="flex-1 bg-dark-200">
+    <StyledView className="flex-1 bg-dark-200 justify-between ">
       <StyledView className="flex flex-row px-6 py-6 justify-between">
         <StyledView className="flex">
           <Paragraph bold size="large" color="light-100">
@@ -45,20 +44,26 @@ const InvoiceList: React.FC<InvoiceListProps> = ({navigation}) => {
             {state.invoices.length} invoices
           </Paragraph>
         </StyledView>
-        <IconButton
-          icon={
-            <StyledView className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <AddIcon />
-            </StyledView>
-          }
-          title="New"
-          onPress={handleNewInvoice}
-          addClass="bg-primary"
-        />
+        <StyledView className="flex flex-row item">
+          <Filter />
+          <IconButton
+            icon={
+              <StyledView className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
+                <AddIcon />
+              </StyledView>
+            }
+            title="New"
+            onPress={handleNewInvoice}
+            addClass="bg-primary"
+          />
+        </StyledView>
       </StyledView>
-      {/* <Invoices invoices={state.invoices} /> */}
 
-      <EmptyState />
+      {state.invoices.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <Invoices invoices={state.invoices} />
+      )}
     </StyledView>
   );
 };

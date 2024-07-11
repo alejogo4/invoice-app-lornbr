@@ -1,6 +1,6 @@
 import {styled} from 'nativewind';
 import React, {ReactNode} from 'react';
-import {Text} from 'react-native';
+import {StyleProp, Text, TextStyle} from 'react-native';
 
 interface ParagraphProps {
   size?: 'small' | 'medium' | 'large';
@@ -8,6 +8,7 @@ interface ParagraphProps {
   bold?: boolean;
   children: ReactNode;
   addClass?: string;
+  style?: StyleProp<TextStyle>;
 }
 
 const StyledText = styled(Text);
@@ -18,6 +19,7 @@ const Paragraph: React.FC<ParagraphProps> = ({
   bold = false,
   addClass,
   children,
+  style,
 }) => {
   let textSizeClasses = 'text-base';
 
@@ -37,7 +39,8 @@ const Paragraph: React.FC<ParagraphProps> = ({
     <StyledText
       className={`font-normal text-light-100 ${
         bold ? 'font-bold' : ''
-      } text-${color} ${textSizeClasses} ${addClass}`}>
+      } text-${color} ${textSizeClasses} ${addClass}`}
+      style={style}>
       {children}
     </StyledText>
   );

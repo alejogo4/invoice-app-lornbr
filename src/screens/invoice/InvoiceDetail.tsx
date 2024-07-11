@@ -3,6 +3,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import IconButton from '@src/components/button/button';
 import Card from '@src/components/card/card';
 import Paragraph from '@src/components/paragraph/paragraph';
+import Status from '@src/components/status/status';
 import {useAppSelector} from '@src/store';
 import {removeInvoice, updateInvoice} from '@src/store/actions/invoiceActions';
 import {RootStackParamList} from '@src/types/InvoiceRoute';
@@ -54,9 +55,9 @@ const InvoiceDetail: React.FC<InvoiceDetailProps> = ({navigation}) => {
       <GoBack />
       <ScrollView>
         <Card style="mb-4 mx-5 mt-4">
-          <StyledView className="flex flex-row justify-between mb-2">
+          <StyledView className="flex flex-row items-center justify-between mb-2">
             <Paragraph size="small">Status</Paragraph>
-            <Paragraph size="small">{selectedInvoice?.status}</Paragraph>
+            <Status status={selectedInvoice?.status || ''} />
           </StyledView>
         </Card>
         <Card style="mb-4 mx-5">

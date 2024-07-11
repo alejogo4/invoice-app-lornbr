@@ -3,6 +3,7 @@ import {
   addInvoice,
   fetchInvoices,
   getInvoiceById,
+  getInvoiceByStatus,
   IInvoice,
   removeInvoice,
   updateInvoice,
@@ -39,7 +40,17 @@ const invoiceReducer = createReducer(initialState, builder => {
       state.selectedInvoice = action.payload
         ? state.invoices.find(invoice => invoice.id === action.payload) || null
         : null;
-    });
+    })
+    .addCase(
+      getInvoiceByStatus,
+      (state, action: PayloadAction<string | null>) => {
+        state.invoices = action.payload
+          ? initialInvoices.filter(
+              invoice => invoice.status === action.payload,
+            ) || initialInvoices
+          : initialInvoices;
+      },
+    );
 });
 
 export default invoiceReducer;

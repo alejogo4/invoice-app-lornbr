@@ -28,7 +28,8 @@ const ComboBox: React.FC<ComboBoxProps> = ({name, control, items}) => {
             <Picker
               selectedValue={value}
               onValueChange={itemValue => onChange(itemValue)}
-              style={styles.picker}>
+              style={styles.picker}
+              dropdownIconColor="white">
               {items.map((item, index) => (
                 <Picker.Item
                   key={index}

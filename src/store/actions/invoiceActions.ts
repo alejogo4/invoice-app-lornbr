@@ -38,3 +38,6 @@ export const fetchInvoices = createAction<IInvoice[]>(
 export const getInvoiceById = createAction<string | null>(
   'invoice/getInvoiceById',
 );
+export const getInvoiceByStatus = createAction<string | null>(
+  'invoice/getInvoiceByStatus',
+);

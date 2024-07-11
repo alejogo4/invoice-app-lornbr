@@ -1,3 +1,4 @@
+import {yupResolver} from '@hookform/resolvers/yup';
 import {useNavigation} from '@react-navigation/native';
 import {
   addInvoice,
@@ -8,8 +9,21 @@ import {
 } from '@src/store/actions/invoiceActions';
 import {addDaysToDate} from '@src/utils/date';
 import {generateInvoiceID} from '@src/utils/strings';
+import {useState} from 'react';
 import {useForm, UseFormReturn} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
+import * as yup from 'yup';
+
+export const formSchema = yup.object().shape({
+  clientName: yup.string().required('Client Name is required'),
+  clientEmail: yup
+    .string()
+    .email('Invalid email format')
+    .required('Client Email is required'),
+  createdAt: yup.string().required('Creation Date is required'),
+  paymentTerms: yup.number().required('Payment Terms are required'),
+  description: yup.string().required('Project Description is required'),
+});
 
 interface UseInvoiceFormProps {
   editing?: boolean;
@@ -32,7 +46,12 @@ export const useInvoiceForm = ({
   editing,
   initialData,
 }: UseInvoiceFormProps): UseInvoiceFormReturn => {
+  const [validateForm, setValidateForm] = useState<boolean>(true);
+
+  const activeSchema = validateForm ? yupResolver(formSchema) : undefined;
+
   const methods = useForm({
+    resolver: activeSchema,
     defaultValues: editing ? {...initialData} : {},
   });
 
@@ -81,12 +100,14 @@ export const useInvoiceForm = ({
 
   const onSaveDraft = (data: any) => {
     const invoice = mapDataToInvoice(data, 'draft');
+    setValidateForm(false);
     dispatch(addInvoice(invoice));
     navigation.navigate('Invoices');
   };
 
   const onSaveAndSend = (data: any) => {
     const invoice = mapDataToInvoice(data, 'pending');
+    setValidateForm(true);
     dispatch(addInvoice(invoice));
     navigation.navigate('Invoices');
   };
